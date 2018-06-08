@@ -1,5 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
+// Version 1.0.1
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
@@ -63,6 +64,12 @@ function bildzoom_init(element, bilderliste) {
 			font-size:15vh;
 			color:white;
 			text-align:center;
+			transition:0.2s ease;
+		}
+		#bildzoom_links:hover,
+		#bildzoom_rechts:hover {
+			transform:scale(1.1);
+			color:#8888ff;
 		}
 		#bildzoom_links {
 			cursor: pointer;
@@ -117,10 +124,10 @@ function bildzoom_init(element, bilderliste) {
 
 function bildzoom_auswahl(i) {
 	bildzoom["nummer"] = i;
-	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom["nummer"]].url).fadeIn();
-	$("#bildzoom").fadeOut(function() {
+	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom["nummer"]].url).stop().fadeIn();
+	$("#bildzoom").stop().fadeOut(function() {
 		$("#bildzoom").attr("src", $("#bildzoom_2").attr("src"));
-		$("#bildzoom").show();
+		$("#bildzoom").stop().show();
 		$("#bildzoom_2").hide();
     });
 }
