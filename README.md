@@ -1,5 +1,5 @@
 # Bildzoom
-Javascript Plugin für eine Bildergaleriezoom
+Javascript Plugin für einen Vollbild in der Bildergalerie
 
 # Benötigt
 JQuery<br>
