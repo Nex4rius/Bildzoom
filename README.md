@@ -1,4 +1,4 @@
-# Bildzoom
+# Bildzoom Galerie
 Javascript Plugin für einen Vollbild in der Bildergalerie
 
 # Benötigt
