@@ -75,7 +75,7 @@ function bildzoom_init(element, bilderliste) {
 		</style>`);
 	
 		$(document).on("click", bildzoom["element"], function () { // Bildergalerie Zoom Klick
-			if (bildzoom["liste"].length === 1) {
+			if (bildzoom["liste"].length <= 1) {
 				$("#bildzoom_links").remove();
 				$("#bildzoom_rechts").remove();
 			}
@@ -96,13 +96,13 @@ function bildzoom_init(element, bilderliste) {
 		});
 	
 		$(document).on("click", "#bildzoom_links", function () { // Bildergaleriezoom links
-			bildzoom_nummer = (bildzoom_nummer === 0 ? bildzoom["liste"].length : bildzoom_nummer) - 1;
-			bildzoom_auswahl(bildzoom_nummer);
+			bildzoom["nummer"] = (bildzoom["nummer"] === 0 ? bildzoom["liste"].length : bildzoom["nummer"]) - 1;
+			bildzoom_auswahl(bildzoom["nummer"]);
 		});
 	
 		$(document).on("click", "#bildzoom_rechts", function () { // Bildergaleriezoom rechts
-			bildzoom_nummer = bildzoom_nummer >= bildzoom["liste"].length - 1 ? 0 : bildzoom_nummer + 1;
-			bildzoom_auswahl(bildzoom_nummer);
+			bildzoom["nummer"] = bildzoom["nummer"] >= bildzoom["liste"].length - 1 ? 0 : bildzoom["nummer"] + 1;
+			bildzoom_auswahl(bildzoom["nummer"]);
 		});
 	
 		$(document).on("click", "#bildzoom_abdunkeln", function () {
@@ -116,8 +116,8 @@ function bildzoom_init(element, bilderliste) {
 }
 
 function bildzoom_auswahl(i) {
-	bildzoom_nummer = i;
-	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom_nummer].url).fadeIn();
+	bildzoom["nummer"] = i;
+	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom["nummer"]].url).fadeIn();
 	$("#bildzoom").fadeOut(function() {
 		$("#bildzoom").attr("src", $("#bildzoom_2").attr("src"));
 		$("#bildzoom").show();
