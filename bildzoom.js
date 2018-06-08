@@ -14,65 +14,65 @@ function bildzoom_init(element, bilderliste) {
 			<img src="#" id="bildzoom_2" />
 			<div id="bildzoom_abdunkeln"></div>
 		</div>
-	<style>
-	#bildzoom_container {
-		z-index: 999999999999999999999;
-		width:100vw;
-		height:100vh;
-	}
-	#bildzoom_links,
-	#bildzoom_rechts,
-	#bildzoom_abdunkeln,
-	#bildzoom,
-	#bildzoom_2 {
-		display:none;
-	}
-	#bildzoom_abdunkeln,
-	#bildzoom,
-	#bildzoom_2 {
-		position:fixed;
-		top:0;
-		left:0;
-		width:100vw;
-		height:100vh;
-	}
-	#bildzoom,
-	#bildzoom_2 {
-		cursor: zoom-out;
-		box-sizing: border-box;
-		padding:5vh;
-		object-fit: contain;
-		z-index:5;
-	}
-	#bildzoom_2 {
-		z-index:6;
-	}
-	#bildzoom_abdunkeln {
-		cursor: zoom-out;
-		background:black;
-		opacity:0.5;
-		z-index:0;
-	}
-	#bildzoom_links,
-	#bildzoom_rechts {
-		z-index:10;
-		position:fixed;
-		top:40vh;
-		height:22vh;
-		width:10vh;
-		font-size:15vh;
-		color:white;
-		text-align:center;
-	}
-	#bildzoom_links {
-		cursor: pointer;
-		left:2.5vh;
-	}
-	#bildzoom_rechts {
-		cursor: pointer;
-		right:2.5vh;
-	}
-	</style>`);
+		<style>
+		#bildzoom_container {
+			z-index: 999999999999999999999;
+			width:100vw;
+			height:100vh;
+		}
+		#bildzoom_links,
+		#bildzoom_rechts,
+		#bildzoom_abdunkeln,
+		#bildzoom,
+		#bildzoom_2 {
+			display:none;
+		}
+		#bildzoom_abdunkeln,
+		#bildzoom,
+		#bildzoom_2 {
+			position:fixed;
+			top:0;
+			left:0;
+			width:100vw;
+			height:100vh;
+		}
+		#bildzoom,
+		#bildzoom_2 {
+			cursor: zoom-out;
+			box-sizing: border-box;
+			padding:5vh;
+			object-fit: contain;
+			z-index:5;
+		}
+		#bildzoom_2 {
+			z-index:6;
+		}
+		#bildzoom_abdunkeln {
+			cursor: zoom-out;
+			background:black;
+			opacity:0.5;
+			z-index:0;
+		}
+		#bildzoom_links,
+		#bildzoom_rechts {
+			z-index:10;
+			position:fixed;
+			top:40vh;
+			height:22vh;
+			width:10vh;
+			font-size:15vh;
+			color:white;
+			text-align:center;
+		}
+		#bildzoom_links {
+			cursor: pointer;
+			left:2.5vh;
+		}
+		#bildzoom_rechts {
+			cursor: pointer;
+			right:2.5vh;
+		}
+		</style>`);
 	
 		$(document).on("click", bildzoom["element"], function () { // Bildergalerie Zoom Klick
 			if (bildzoom["liste"].length === 1) {
