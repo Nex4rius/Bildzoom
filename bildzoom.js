@@ -1,4 +1,4 @@
-// Bildzoom Galerie Plugin von Philipp Orak
+// Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
 var bildzoom = [];
 
