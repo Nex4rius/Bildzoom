@@ -1,6 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.1.3
+// Version 1.1.4
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
@@ -41,7 +41,7 @@ function bildzoom_init(element, bilderliste) {
 		#bildzoom_2 {
 			cursor: zoom-out;
 			box-sizing: border-box;
-			padding:5vh;
+			padding:5vh 7vw;
 			object-fit: contain;
 			z-index:5;
 		}
@@ -111,7 +111,7 @@ function bildzoom_klick() {
 			bildzoom_auswahl(i);
 			var bildergaleriezoom = ["#bildzoom_links", "#bildzoom_rechts", "#bildzoom_abdunkeln", "#bildzoom_container i"];
 			for (var j = 0; j < bildergaleriezoom.length; j++) $(bildergaleriezoom[j]).fadeIn();
-			$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}).show().animate({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh"}, "slow", function() {
+			$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}).show().animate({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}, "slow", function() {
 				$(document).on("click", "#bildzoom_abdunkeln", bildzoom_aus);
 				$(document).on("click", "#bildzoom", bildzoom_aus);
 			});
@@ -140,7 +140,7 @@ function bildzoom_aus() { // Bildergaleriezoom Zurück
 	var oben = a.offset().top;
 	var links = a.offset().left;
 	$("#bildzoom_container *:not(#bildzoom)").fadeOut();
-	$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
+	$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
 		$(document).on("click", bildzoom["element"], bildzoom_klick);
 	});
 }
