@@ -1,6 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.0.1
+// Version 1.1.2
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
@@ -81,27 +81,6 @@ function bildzoom_init(element, bilderliste) {
 		}
 		</style>`);
 	
-		$(document).on("click", bildzoom["element"], function () { // Bildergalerie Zoom Klick
-			if (bildzoom["liste"].length <= 1) {
-				$("#bildzoom_links").remove();
-				$("#bildzoom_rechts").remove();
-			}
-			var link = $(this).attr("src");
-			var breite = $(this).width();
-			var hoch = $(this).height();
-			var oben = $(this).offset().top;
-			var links = $(this).offset().left;
-			for (var i = 0; i < bildzoom["liste"].length; i++) {
-				if (bildzoom["liste"][i].url === link) {
-					bildzoom_auswahl(i);
-					var bildergaleriezoom = ["#bildzoom_links", "#bildzoom_rechts", "#bildzoom_abdunkeln", "#bildzoom_container i"];
-					for (var j = 0; j < bildergaleriezoom.length; j++) $(bildergaleriezoom[j]).fadeIn();
-					$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}).show().animate({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh"}, "slow");
-					break;
-				}
-			}
-		});
-	
 		$(document).on("click", "#bildzoom_links", function () { // Bildergaleriezoom links
 			bildzoom["nummer"] = (bildzoom["nummer"] === 0 ? bildzoom["liste"].length : bildzoom["nummer"]) - 1;
 			bildzoom_auswahl(bildzoom["nummer"]);
@@ -112,14 +91,33 @@ function bildzoom_init(element, bilderliste) {
 			bildzoom_auswahl(bildzoom["nummer"]);
 		});
 	
-		$(document).on("click", "#bildzoom_abdunkeln", function () {
-			bildzoom_aus();
-		});
-		
-		$(document).on("click", "#bildzoom", function () {
-			bildzoom_aus();
-		});
+		$(document).on("click", bildzoom["element"], bildzoom_klick);
 	});
+}
+
+function bildzoom_klick() {
+	$(document).off("click", bildzoom["element"], bildzoom_klick);
+	if (bildzoom["liste"].length <= 1) {
+		$("#bildzoom_links").remove();
+		$("#bildzoom_rechts").remove();
+	}
+	var link = $(this).attr("src");
+	var breite = $(this).width();
+	var hoch = $(this).height();
+	var oben = $(this).offset().top;
+	var links = $(this).offset().left;
+	for (var i = 0; i < bildzoom["liste"].length; i++) {
+		if (bildzoom["liste"][i].url === link) {
+			bildzoom_auswahl(i);
+			var bildergaleriezoom = ["#bildzoom_links", "#bildzoom_rechts", "#bildzoom_abdunkeln", "#bildzoom_container i"];
+			for (var j = 0; j < bildergaleriezoom.length; j++) $(bildergaleriezoom[j]).fadeIn();
+			$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}).show().animate({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh"}, "slow", function() {
+				$(document).on("click", "#bildzoom_abdunkeln", bildzoom_aus);
+				$(document).on("click", "#bildzoom", bildzoom_aus);
+			});
+			break;
+		}
+	}
 }
 
 function bildzoom_auswahl(i) {
@@ -127,11 +125,23 @@ function bildzoom_auswahl(i) {
 	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom["nummer"]].url).stop().fadeIn();
 	$("#bildzoom").stop().fadeOut(function() {
 		$("#bildzoom").attr("src", $("#bildzoom_2").attr("src"));
-		$("#bildzoom").stop().show();
-		$("#bildzoom_2").hide();
+		$("#bildzoom").stop().show(function() {
+			$("#bildzoom_2").hide();
+		});
     });
 }
 
 function bildzoom_aus() { // Bildergaleriezoom Zurück
-    $("#bildzoom_container *").fadeOut();
+	$(document).off("click", "#bildzoom_abdunkeln", bildzoom_aus);
+	$(document).off("click", "#bildzoom", bildzoom_aus);
+	var a = $(bildzoom["element"]+'[src="'+$("#bildzoom").attr("src")+'"]');
+	var link = a.attr("src");
+	var breite = a.width();
+	var hoch = a.height();
+	var oben = a.offset().top;
+	var links = a.offset().left;
+	$("#bildzoom_container *:not(#bildzoom)").fadeOut();
+	$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
+		$(document).on("click", bildzoom["element"], bildzoom_klick);
+	});
 }
