@@ -12,6 +12,8 @@
             $ = jQuery;
             function bilder_von_flickr(data) {
                 console.log(data);
+                var bilder = data[0].photos.photo;
+                console.log(bilder);
             }
         </script>
         <script src="https://api.flickr.com/services/rest/?jsoncallback=bilder_von_flickr&method=flickr.photos.search&text=potrait&sort=interestingness-desc&format=json&per_page=50&api_key=2b76793b6787a09c14929811d2cef67e&extras=url_m"></script>
