@@ -1,5 +1,4 @@
 .galerie_hier img {
-  height:300px;
-  margin:10px;
+  max-height:500px;
   float:left;
 }
