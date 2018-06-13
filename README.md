@@ -11,4 +11,4 @@ var liste = [{"url":"/bilder/bild1.png"}, {"url":"/bilder/bild2.png"}, {"url":"/
 bildzoom_init(element, liste); // Initialisierung des Plugins
 
 # Demo:<br>
-<a href="https://nex4rius.github.io/Bildzoom-Galerie/">Demo</a>
+<a href="https://nex4rius.github.io/Bildzoom-Galerie?">Demo</a>
