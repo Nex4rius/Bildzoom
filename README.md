@@ -1,5 +1,6 @@
 # Bildzoom Galerie
-Javascript Plugin für einen Vollbild in der Bildergalerie
+Plugin für einen Vollbild /Zoom in der Bildergalerie<br>
+Dies Plugin kann mit allen Arten von Bildergalerien kombiniert werden
 
 # Benötigt
 JQuery<br>
