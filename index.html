@@ -11,18 +11,20 @@
         <script type="text/javascript">
             $ = jQuery;
             function bilder_von_flickr(data) {
-                var liste = data.photos.photo;
-                for (var i = 0; i <= liste.length; i++) {
-                    if (typeof liste[i] !== "undefined") {
-                        liste[i].url = liste[i].url_m;
-                        console.log(liste[i].url);
-                        $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
-                        $(".galerie_hier").insertAfter('<img src="'+liste[i].url+'" />');
-                        console.log('<img src="'+liste[i].url+'" />');
+                liste = data.photos.photo;
+                jQuery(document).ready(function(){
+                    for (var i = 0; i <= liste.length; i++) {
+                        if (typeof liste[i] !== "undefined") {
+                            liste[i].url = liste[i].url_m;
+                            console.log(liste[i].url);
+                            $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
+                            $(".galerie_hier").insertAfter('<img src="'+liste[i].url+'" />');
+                            console.log('<img src="'+liste[i].url+'" />');
+                        }
                     }
-                }
-                console.log(liste);
-                bildzoom_init(".galerie_hier", liste); // Initialisierung des Plugins
+                    console.log(liste);
+                    bildzoom_init(".galerie_hier", liste); // Initialisierung des Plugins
+                });
             }
         </script>
         <!--Quelle der Beispielbilder-->
