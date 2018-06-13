@@ -15,8 +15,10 @@
                 var liste = data.photos.photo;
                 console.log(liste);
                 for (var i = 0; i <= liste.length; i++) {
-                    liste[i].url = liste[i].url_m;
-                    $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
+                    if (typeof liste[i] !== "undefined") {
+                        liste[i].url = liste[i].url_m;
+                        $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
+                    }
                 }
                 console.log(liste);
                 bildzoom_init(".galerie_hier", liste); // Initialisierung des Plugins
