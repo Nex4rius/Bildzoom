@@ -11,12 +11,11 @@
         <script type="text/javascript">
             $ = jQuery;
             function bilder_von_flickr(data) {
-                console.log(data);
                 var liste = data.photos.photo;
-                console.log(liste);
                 for (var i = 0; i <= liste.length; i++) {
                     if (typeof liste[i] !== "undefined") {
                         liste[i].url = liste[i].url_m;
+                        console.log(liste[i].url);
                         $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
                     }
                 }
