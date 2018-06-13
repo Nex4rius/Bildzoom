@@ -17,6 +17,7 @@
                         liste[i].url = liste[i].url_m;
                         console.log(liste[i].url);
                         $(".galerie_hier").append('<img src="'+liste[i].url+'" />');
+                        $(".galerie_hier").insertAfter('<img src="'+liste[i].url+'" />');
                         console.log('<img src="'+liste[i].url+'" />');
                     }
                 }
