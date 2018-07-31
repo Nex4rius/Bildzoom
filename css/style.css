@@ -1,3 +1,7 @@
+html, body {
+  width:100%;
+  overflow-x:hidden;
+}
 .galerie_hier img {
   max-height:500px;
   margin:5px;
