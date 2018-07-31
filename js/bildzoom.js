@@ -1,6 +1,7 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.2.2
+// Version 1.2.3
+"use strict";
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
