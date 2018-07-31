@@ -104,7 +104,7 @@ function bildzoom_klick() {
 	var link = $(this).attr("src");
 	var breite = $(this).width();
 	var hoch = $(this).height();
-	var oben = $(this).offset().top;
+	var oben = $(this).offset().top + $(document).scrollTop();
 	var links = $(this).offset().left;
 	for (var i = 0; i < bildzoom["liste"].length; i++) {
 		if (bildzoom["liste"][i].url === link) {
