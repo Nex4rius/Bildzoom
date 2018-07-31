@@ -1,6 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.1.4
+// Version 1.2.0
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
@@ -111,10 +111,18 @@ function bildzoom_klick() {
 			bildzoom_auswahl(i);
 			var bildergaleriezoom = ["#bildzoom_links", "#bildzoom_rechts", "#bildzoom_abdunkeln", "#bildzoom_container i"];
 			for (var j = 0; j < bildergaleriezoom.length; j++) $(bildergaleriezoom[j]).fadeIn();
-			$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}).show().animate({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}, "slow", function() {
-				$(document).on("click", "#bildzoom_abdunkeln", bildzoom_aus);
-				$(document).on("click", "#bildzoom", bildzoom_aus);
-			});
+			$("#bildzoom").css({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0, "cursor" : "default"}).show();
+			setTimeout(function() {
+				$("#bildzoom").css("transition", "1s ease");
+				setTimeout(function() {
+					$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"});
+					setTimeout(function() {
+						$("#bildzoom").css({"transition" : "unset", "cursor" : "zoom-out"});
+						$(document).on("click", "#bildzoom_abdunkeln", bildzoom_aus);
+						$(document).on("click", "#bildzoom", bildzoom_aus);
+					}, 1000);
+				}, 10);
+			}, 10);
 			break;
 		}
 	}
