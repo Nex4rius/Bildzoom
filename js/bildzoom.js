@@ -1,6 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.2.1
+// Version 1.2.2
 var bildzoom = [];
 
 function bildzoom_init(element, bilderliste) {
@@ -145,7 +145,7 @@ function bildzoom_aus() { // Bildergaleriezoom Zurück
 	var link = a.attr("src");
 	var breite = a.width();
 	var hoch = a.height();
-	var oben = a.offset().top;
+	var oben = a.offset().top - $(document).scrollTop();
 	var links = a.offset().left;
 	$("#bildzoom_container *:not(#bildzoom)").fadeOut();
 	$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
