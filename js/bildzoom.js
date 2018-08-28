@@ -1,6 +1,6 @@
 // Bildzoom Galerie Plugin von Nexarius
 // Benötigt JQuery; Font Awesome
-// Version 1.2.3
+// Version 1.2.4
 "use strict";
 var bildzoom = [];
 
@@ -93,6 +93,14 @@ function bildzoom_init(element, bilderliste) {
 		});
 	
 		$(document).on("click", bildzoom["element"], bildzoom_klick);
+
+		setTimeout(function() {
+			bildzoom["vorladen"] = [];
+			for (var i = 0, len = bildzoom["liste"].length; i < len; i++) {
+				bildzoom["vorladen"][i] = new Image();
+				bildzoom["vorladen"][i].src = bildzoom["liste"][i].url;
+			}
+		}, 5000); // Warten um nicht das Laden der anfangs sichtbaren Teile der Website zu verlangsamen
 	});
 }
 
@@ -133,23 +141,26 @@ function bildzoom_auswahl(i) {
 	bildzoom["nummer"] = i;
 	$("#bildzoom_2").attr("src", bildzoom["liste"][bildzoom["nummer"]].url).stop().fadeIn();
 	$("#bildzoom").stop().fadeOut(function() {
-		$("#bildzoom").attr("src", $("#bildzoom_2").attr("src"));
-		$("#bildzoom").stop().show();
+		$("#bildzoom").attr("src", $("#bildzoom_2").attr("src")).stop().show();
 		$("#bildzoom_2").hide();
-    });
+	});
 }
 
 function bildzoom_aus() { // Bildergaleriezoom Zurück
 	$(document).off("click", "#bildzoom_abdunkeln", bildzoom_aus);
 	$(document).off("click", "#bildzoom", bildzoom_aus);
 	var a = $(bildzoom["element"]+'[src="'+$("#bildzoom").attr("src")+'"]');
-	var link = a.attr("src");
-	var breite = a.width();
-	var hoch = a.height();
-	var oben = a.offset().top - $(document).scrollTop();
-	var links = a.offset().left;
-	$("#bildzoom_container *:not(#bildzoom)").fadeOut();
-	$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
+	if (a.length > 0) {
+		var breite = a.width();
+		var hoch = a.height();
+		var oben = a.offset().top - $(document).scrollTop();
+		var links = a.offset().left;
+		$("#bildzoom_container *:not(#bildzoom)").fadeOut();
+		$("#bildzoom").css({"height" : "100vh", "width" : "100vw", "top" : 0, "left" : 0, "padding" : "5vh 7vw"}).animate({"height" : hoch, "width" : breite, "top" : oben, "left" : links, "padding" : 0}, "slow").fadeOut(10, function() {
+			$(document).on("click", bildzoom["element"], bildzoom_klick);
+		});
+	} else {
+		$("#bildzoom_container *").fadeOut();
 		$(document).on("click", bildzoom["element"], bildzoom_klick);
-	});
+	}
 }
